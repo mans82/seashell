@@ -12,6 +12,8 @@ int main() {
     state.promptTextFormat = " $? $c $u $# ";
     state.lastExitCode = 0;
 
+    std::cout << seashell::getInitialPrompt();
+
     while (std::cin) {
         std::cout << seashell::makePrompt(state);
         std::cout.flush();
