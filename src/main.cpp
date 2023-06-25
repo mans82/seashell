@@ -7,6 +7,7 @@
 
 int main() {
     ShellState state;
+    state.path = "/usr/bin";
     state.lastExitCode = 0;
 
     while (std::cin) {

@@ -3,7 +3,7 @@
 #include "ParseCommand.h"
 #include "CWDCommand.h"
 #include "NOPCommand.h"
-#include "ExecutableCommand.h"
+#include "PathPrefixedExecutableCommand.h"
 
 namespace seashell {
     Command* parseCommand(std::string commandText) {
@@ -11,7 +11,7 @@ namespace seashell {
 
         if (firstToken == "cd") return new CWDCommand(commandText);
         if (firstToken == "") return new NOPCommand();
-        return new ExecutableCommand(commandText);
+        return new PathPrefixedExecutableCommand(commandText);
 
     }
 }
