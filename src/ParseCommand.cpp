@@ -3,6 +3,7 @@
 #include "ParseCommand.h"
 #include "CWDCommand.h"
 #include "NOPCommand.h"
+#include "ExitCommand.h"
 #include "PathPrefixedExecutableCommand.h"
 
 namespace seashell {
@@ -11,6 +12,7 @@ namespace seashell {
 
         if (firstToken == "cd") return new CWDCommand(commandText);
         if (firstToken == "") return new NOPCommand();
+        if (firstToken == "exit") return new ExitCommand(commandText);
         return new PathPrefixedExecutableCommand(commandText);
 
     }
