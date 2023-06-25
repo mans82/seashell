@@ -15,5 +15,8 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	mkdir -p $(@D)
 	$(CXX) -o $@ -c $<
 
+run: exec
+	$(BIN_DIR)/$(EXEC_NAME)
+
 clean:
 	rm -rf $(BUILD_DIR)
