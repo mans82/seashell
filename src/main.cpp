@@ -3,15 +3,17 @@
 #include <memory>
 
 #include "ShellState.h"
+#include "Prompt.h"
 #include "ParseCommand.h"
 
 int main() {
     ShellState state;
     state.path = "/usr/bin";
+    state.promptTextFormat = "\033[1m $? $c $u $# \033[0m";
     state.lastExitCode = 0;
 
     while (std::cin) {
-        std::cout << "SEASHELL: ";
+        std::cout << seashell::makePrompt(state.promptTextFormat, state);
         std::cout.flush();
 
         std::string line;
@@ -23,6 +25,6 @@ int main() {
 
         currentCommand->execute(state);
 
-        std::cout << "Process exited with error code " << state.lastExitCode << std::endl;
+        // std::cout << "Process exited with error code " << state.lastExitCode << std::endl;
     }
 }
