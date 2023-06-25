@@ -6,9 +6,9 @@
 
 namespace seashell {
 
-    std::string makePrompt(std::string promptTextFormat, ShellState& state) {
+    std::string makePrompt(ShellState& state) {
         
-        std::string res = promptTextFormat;
+        std::string res = state.promptTextFormat;
 
         size_t pos;
 

@@ -13,7 +13,7 @@ int main() {
     state.lastExitCode = 0;
 
     while (std::cin) {
-        std::cout << seashell::makePrompt(state.promptTextFormat, state);
+        std::cout << seashell::makePrompt(state);
         std::cout.flush();
 
         std::string line;
@@ -25,6 +25,5 @@ int main() {
 
         currentCommand->execute(state);
 
-        // std::cout << "Process exited with error code " << state.lastExitCode << std::endl;
     }
 }
