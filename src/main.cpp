@@ -1,12 +1,14 @@
 #include <iostream>
 #include <string>
+#include <memory>
 
-#include "ExecutableCommand.h"
 #include "ShellState.h"
+#include "ParseCommand.h"
 
 int main() {
     ShellState state;
     state.lastExitCode = 0;
+
     while (std::cin) {
         std::cout << "SEASHELL: ";
         std::cout.flush();
@@ -14,9 +16,11 @@ int main() {
         std::string line;
         std::getline(std::cin, line);
 
-        seashell::ExecutableCommand currentCommand(line);
+        seashell::Command* parsedCommandPtr = seashell::parseCommand(line);
 
-        currentCommand.execute(state);
+        std::unique_ptr<seashell::Command> currentCommand(parsedCommandPtr);
+
+        currentCommand->execute(state);
 
         std::cout << "Process exited with error code " << state.lastExitCode << std::endl;
     }
