@@ -9,7 +9,7 @@
 int main() {
     ShellState state;
     state.path = "/usr/bin";
-    state.promptTextFormat = "\033[1m $? $c $u $# \033[0m";
+    state.promptTextFormat = " $? $c $u $# ";
     state.lastExitCode = 0;
 
     while (std::cin) {

@@ -28,7 +28,8 @@ namespace seashell {
             res.replace(pos, 2, isRunningAsRoot() ? "#" : "$");
         }
 
-        return res;
+        std::string boldRes = "\033[1m" + res + "\033[0m";
+        return boldRes;
 
     }
 
