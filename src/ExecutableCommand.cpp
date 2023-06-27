@@ -5,9 +5,13 @@
 
 #include "ExecutableCommand.h"
 #include "ShellState.h"
+#include <signal.h>
+
 #include "NullTerminatedBuffer.h"
 
 namespace seashell {
+    void emptySignalHandler(int signal) {}
+
     ExecutableCommand::ExecutableCommand(std::string commandText) : Command(commandText) {};
 
     void ExecutableCommand::execute(ShellState& state) {
@@ -17,8 +21,16 @@ namespace seashell {
         pid_t childPid = fork();
         if (childPid != 0) {
             // This is the parent
+
+            struct sigaction oldSignalHandler;
+
+            sigaction(SIGINT, NULL, &oldSignalHandler);
+            signal(SIGINT, emptySignalHandler);
+
             int childStatus;
             waitpid(childPid, &childStatus, 0);
+
+            sigaction(SIGINT, &oldSignalHandler, NULL);
 
             ExitCode childExitCode = WEXITSTATUS(childStatus);
 
