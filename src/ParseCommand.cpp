@@ -5,6 +5,7 @@
 #include "NOPCommand.h"
 #include "ExitCommand.h"
 #include "SetPromptCommand.h"
+#include "ExecutableCommand.h"
 #include "PathPrefixedExecutableCommand.h"
 
 namespace seashell {
@@ -15,6 +16,8 @@ namespace seashell {
         if (firstToken == "") return new NOPCommand();
         if (firstToken == "exit") return new ExitCommand(commandText);
         if (firstToken == "setp") return new SetPromptCommand(commandText);
+
+        if (firstToken.find('/') != std::string::npos) return new ExecutableCommand(commandText);
         return new PathPrefixedExecutableCommand(commandText);
 
     }
